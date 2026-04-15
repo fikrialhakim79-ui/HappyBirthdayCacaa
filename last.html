@@ -57,11 +57,85 @@
         }
         .ending {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             font-size: 1.8rem;
             color: #ff69b4;
+            margin-bottom: 20px;
         }
+        
+        /* LOVE BUTTON DESIGN */
+        .love-button-container {
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        
+        .love-button {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 
+                0 8px 30px rgba(255, 105, 180, 0.4),
+                0 0 0 0 rgba(255, 105, 180, 0.7);
+            animation: pulse-glow 2s infinite;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .love-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .love-button:hover {
+            transform: scale(1.15) translateY(-3px);
+            box-shadow: 
+                0 12px 50px rgba(255, 105, 180, 0.6),
+                0 0 30px rgba(255, 20, 147, 0.5);
+        }
+        
+        .love-button:hover::before {
+            left: 100%;
+        }
+        
+        .love-button:active {
+            transform: scale(1.1) translateY(-1px);
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 
+                    0 8px 30px rgba(255, 105, 180, 0.4),
+                    0 0 0 0 rgba(255, 105, 180, 0.7);
+            }
+            50% {
+                box-shadow: 
+                    0 8px 30px rgba(255, 105, 180, 0.5),
+                    0 0 0 15px rgba(255, 105, 180, 0);
+            }
+        }
+        
         .floating { position: fixed; z-index: 999; pointer-events: none; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .ending { font-size: 1.4rem; }
+            .love-button { font-size: 1.1rem; padding: 15px 35px; }
+        }
     </style>
 </head>
 <body>
@@ -85,6 +159,10 @@
     <div class="ending">
         I LOVE YOU FOREVER CACAA 💖<br>
         Semoga panjang umur, sehat selalu, dan bahagia setiap hari ya sayangku 🌸
+    </div>
+
+    <div class="love-button-container">
+        <button id="love-button" class="love-button">💖 I Love You Cacaa 💖</button>
     </div>
 
     <!-- MUSIK AUTO PLAY (HIDDEN) -->
@@ -114,6 +192,41 @@
             });
         }
         setInterval(createFloating, 600);
+
+        // === LOVE BUTTON CLICK ===
+        document.getElementById('love-button').addEventListener('click', () => {
+            const btn = document.getElementById('love-button');
+            btn.style.transform = 'scale(0.9)';
+            
+            // Create love explosion effect
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '60vh';
+                heart.style.fontSize = (Math.random() * 40 + 25) + 'px';
+                heart.style.zIndex = '9998';
+                heart.style.pointerEvents = 'none';
+                heart.style.fontWeight = 'bold';
+                document.body.appendChild(heart);
+                
+                gsap.to(heart, {
+                    y: -window.innerHeight - 300,
+                    x: Math.random() * 400 - 200,
+                    rotation: Math.random() * 1080,
+                    duration: Math.random() * 3 + 2.5,
+                    opacity: 0,
+                    ease: "power2.out",
+                    onComplete: () => heart.remove()
+                });
+            }
+            
+            setTimeout(() => {
+                alert("💖 I LOVE YOU SO MUCH CACAA 💖\nYou make my world brighter every day! 🌍✨\nHappy Birthday to the most beautiful girl 🌸");
+                btn.style.transform = 'scale(1)';
+            }, 600);
+        });
     </script>
 </body>
 </html>
