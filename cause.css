@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 body {
@@ -15,16 +14,11 @@ body {
     font-family: 'Quicksand', sans-serif;
     overflow-x: hidden;
     padding: 2rem;
+    cursor: auto;
 }
 
 .custom-cursor {
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.1s;
+    display: none;
 }
 
 .custom-cursor svg {
@@ -158,19 +152,6 @@ h1 {
     h1 { font-size: 2rem; }
     .reason-card { margin: 1rem; }
     .reason-text { font-size: 1rem; }
-}
-.shuffle-button {
-    background: linear-gradient(45deg, #ff69b4, #ff99cc);
-    border: none;
-    border-radius: 50px;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    color: white;
-    margin: 2rem 0;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Comic Neue', cursive;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
 }
 
 .shuffle-button.story-mode {

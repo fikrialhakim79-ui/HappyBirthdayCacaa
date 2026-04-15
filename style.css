@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 body {
@@ -17,6 +16,7 @@ body {
     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
     overflow: hidden;
     position: relative;
+    cursor: auto;
 }
 
 .cursor {
@@ -28,6 +28,7 @@ body {
     pointer-events: none;
     mix-blend-mode: difference;
     transition: transform 0.2s;
+    display: none;
 }
 
 .container {

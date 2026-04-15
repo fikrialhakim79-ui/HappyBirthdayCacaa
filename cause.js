@@ -1,6 +1,6 @@
-// Reasons (bisa kamu tambah sendiri nanti)
+// Reasons
 const reasons = [
-    { text: "You’re such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💖", emoji: "🌟", gif: "gif1.gif" },
+    { text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💖", emoji: "🌟", gif: "gif1.gif" },
     { text: "May your day be filled with love, laughter, and endless joy. 🌸 ", emoji: "💗", gif: "gif2.gif" },
     { text: "Wishing you success, happiness, and everything your heart desires. ✨ ", emoji: "💕", gif: "gif1.gif" },
     { text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳 ", emoji: "🌟", gif: "gif2.gif" }
@@ -94,24 +94,4 @@ document.getElementById('love-button').addEventListener('click', () => {
     }, 800);
 });
 
-// Music Player (sama seperti index)
-const playPauseBtn = document.getElementById('play-pause-btn');
-const youtubeIframe = document.getElementById('youtube-player');
-let isPlaying = false;
-function toggleMusic() {
-    if (isPlaying) {
-        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        playPauseBtn.innerHTML = '▶️';
-    } else {
-        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        playPauseBtn.innerHTML = '❚❚';
-    }
-    isPlaying = !isPlaying;
-}
-playPauseBtn.addEventListener('click', toggleMusic);
-
 setInterval(createFloatingElement, 2000);
-const cursor = document.querySelector('.custom-cursor');
-document.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, { x: e.clientX - 15, y: e.clientY - 15, duration: 0.2 });
-});

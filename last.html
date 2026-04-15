@@ -16,6 +16,7 @@
             font-family: 'Quicksand', sans-serif;
             color: #4a4a4a;
             overflow-x: hidden;
+            cursor: auto;
         }
         @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         
@@ -86,11 +87,12 @@
         Semoga panjang umur, sehat selalu, dan bahagia setiap hari ya sayangku 🌸
     </div>
 
-    <!-- MUSIK AUTO PLAY -->
+    <!-- MUSIK AUTO PLAY (HIDDEN) -->
     <iframe id="youtube-player" width="0" height="0" 
         src="https://www.youtube.com/embed/n5i3QRvPA9Y?enablejsapi=1&autoplay=1&loop=1&start=18&playlist=n5i3QRvPA9Y" 
-        frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        frameborder="0" allow="autoplay; encrypted-media" style="display:none;"></iframe>
 
+    <script src="audio-manager.js"></script>
     <script>
         // Floating hearts
         function createFloating() {
@@ -112,12 +114,6 @@
             });
         }
         setInterval(createFloating, 600);
-
-        // Force auto play musik
-        const player = document.getElementById('youtube-player');
-        window.addEventListener('load', () => {
-            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        });
     </script>
 </body>
 </html>

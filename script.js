@@ -39,14 +39,10 @@ function createFloating() {
     });
 }
 
-// === MUSIK + NAVIGASI ===
-const youtubeIframe = document.getElementById('youtube-player');
+// === NAVIGASI KE HALAMAN BERIKUTNYA ===
 const ctaButton = document.querySelector('.cta-button');
 
 ctaButton.addEventListener('click', () => {
-    // Mulai musik otomatis
-    youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-
     // Animasi klik
     gsap.to(ctaButton, { scale: 0.95, duration: 0.2, yoyo: true, repeat: 1 });
 

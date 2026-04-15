@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why I Love You, Cacaa 💖</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="stylesheet" href="./cause.css">
+    <link rel="stylesheet" href="cause.css">
 </head>
 <body>
-    <div class="custom-cursor">
-        <svg viewBox="0 0 24 24">
-            <path fill="#ff69b4" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-    </div>
-
     <div class="container">
         <h1>Happy Birthday Caca Cantiikkk 💖</h1>
         <div id="reasons-container"></div>
@@ -29,18 +23,12 @@
         </div>
     </div>
 
-    <!-- MUSIK HIDDEN (auto play di semua halaman) -->
+    <!-- MUSIK AUTO PLAY (HIDDEN) -->
     <iframe id="youtube-player" width="0" height="0" 
         src="https://www.youtube.com/embed/n5i3QRvPA9Y?enablejsapi=1&autoplay=1&loop=1&start=18&playlist=n5i3QRvPA9Y" 
-        frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        frameborder="0" allow="autoplay; encrypted-media" style="display:none;"></iframe>
 
+    <script src="audio-manager.js"></script>
     <script src="cause.js"></script>
-    <script>
-        // Auto play musik saat halaman ini dibuka
-        const player = document.getElementById('youtube-player');
-        window.addEventListener('load', () => {
-            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        });
-    </script>
 </body>
 </html>
