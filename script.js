@@ -1,9 +1,11 @@
+// Cursor
 const cursor = document.querySelector('.cursor');
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
 });
 
+// Typing effect
 const greetingText = "Hey You Know What! You're the most adorable human i ever met! 💖";
 const greetingElement = document.querySelector('.greeting');
 let charIndex = 0;
@@ -15,6 +17,7 @@ function typeGreeting() {
     }
 }
 
+// Floating hearts
 const floatingElements = ['💖', '✨', '🌸', '💕', '💗'];
 function createFloating() {
     const element = document.createElement('div');
@@ -24,34 +27,33 @@ function createFloating() {
     element.style.top = Math.random() * 100 + 'vh';
     element.style.fontSize = (Math.random() * 30 + 20) + 'px';
     document.body.appendChild(element);
-    gsap.to(element, { y: -500, x: Math.random() * 100 - 50, rotation: Math.random() * 360, duration: Math.random() * 5 + 5, opacity: 0, onComplete: () => element.remove() });
+
+    gsap.to(element, {
+        y: -500,
+        x: Math.random() * 100 - 50,
+        rotation: Math.random() * 360,
+        duration: Math.random() * 5 + 5,
+        opacity: 0,
+        ease: "none",
+        onComplete: () => element.remove()
+    });
 }
 
-// Music Player
-const playPauseBtn = document.getElementById('play-pause-btn');
+// === MUSIK + NAVIGASI ===
 const youtubeIframe = document.getElementById('youtube-player');
-let isPlaying = false;
+const ctaButton = document.querySelector('.cta-button');
 
-function toggleMusic() {
-    if (isPlaying) {
-        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        playPauseBtn.innerHTML = '▶️';
-    } else {
-        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        playPauseBtn.innerHTML = '❚❚';
-    }
-    isPlaying = !isPlaying;
-}
-playPauseBtn.addEventListener('click', toggleMusic);
+ctaButton.addEventListener('click', () => {
+    // Mulai musik otomatis
+    youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
 
-document.querySelector('.cta-button').addEventListener('click', () => {
+    // Animasi klik
+    gsap.to(ctaButton, { scale: 0.95, duration: 0.2, yoyo: true, repeat: 1 });
+
+    // Pindah ke halaman berikutnya setelah 400ms
     setTimeout(() => {
-        if (!isPlaying) {
-            youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            playPauseBtn.innerHTML = '❚❚';
-            isPlaying = true;
-        }
-    }, 800);
+        window.location.href = 'cause.html';
+    }, 400);
 });
 
 window.addEventListener('load', () => {
