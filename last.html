@@ -4,62 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Beautiful Memories ✨</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        /* Style asli last.html tetap + tambahan music player */
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap');
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
+            background: linear-gradient(135deg, #ffd1dc, #f8d7f0, #e6e6fa, #ffd1dc);
             background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
             font-family: 'Quicksand', sans-serif;
-            overflow-x: hidden;
             color: #4a4a4a;
+            overflow-x: hidden;
         }
         @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        /* ... (semua style asli last.html kamu bisa copy dari repo asli kalau mau) ... */
-        /* FLOATING MUSIC PLAYER */
-        .music-player {
-            position: fixed; bottom: 20px; right: 20px; background: rgba(255,105,180,0.95);
-            color: white; border-radius: 50px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(255,105,180,0.4);
-            display: flex; align-items: center; gap: 10px; z-index: 9999;
+        
+        h1 {
+            text-align: center;
+            padding-top: 40px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255,105,180,0.5);
         }
-        .heart-icon { font-size: 24px; animation: floatHeart 2s infinite ease-in-out; }
-        @keyframes floatHeart { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        .memories {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255,105,180,0.2);
+            transition: transform 0.3s;
+        }
+        .memory-card:hover { transform: scale(1.05); }
+        .memory-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        .memory-card p {
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #ff69b4;
+        }
+        .ending {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.8rem;
+            color: #ff69b4;
+        }
+        .floating { position: fixed; z-index: 999; pointer-events: none; }
     </style>
 </head>
 <body>
-    <h1 style="text-align:center; padding-top:2rem; color:#ff69b4; font-family:'Dancing Script',cursive; font-size:3.5rem;">
-        Happy Birthday Caca Cantiikkk 💗
-    </h1>
-    <!-- Isi memory card kamu bisa pakai yang asli, tinggal ganti foto d1.jpg, d2.jpg, d3.jpg -->
+    <h1>Happy Birthday Caca Cantiikkk 💗</h1>
 
-    <!-- FLOATING MUSIC PLAYER -->
-    <div id="music-player" class="music-player">
-        <span class="heart-icon">💖</span>
-        <div class="song-info">
-            <span class="song-title">P.S. I LOVE YOU</span>
-            <span class="artist">Paul Partohap</span>
+    <div class="memories">
+        <div class="memory-card">
+            <img src="d1.jpg" alt="Memory 1">
+            <p>Kamu yang paling cantik di mataku 💕</p>
         </div>
-        <button id="play-pause-btn" class="play-btn">▶️</button>
+        <div class="memory-card">
+            <img src="d2.jpg" alt="Memory 2">
+            <p>Setiap senyummu bikin hariku cerah ✨</p>
+        </div>
+        <div class="memory-card">
+            <img src="d3.jpg" alt="Memory 3">
+            <p>Terima kasih sudah ada di hidupku 🥰</p>
+        </div>
     </div>
 
+    <div class="ending">
+        I LOVE YOU FOREVER CACAA 💖<br>
+        Semoga panjang umur, sehat selalu, dan bahagia setiap hari ya sayangku 🌸
+    </div>
+
+    <!-- MUSIK AUTO PLAY -->
     <iframe id="youtube-player" width="0" height="0" 
-        src="https://www.youtube.com/embed/n5i3QRvPA9Y?enablejsapi=1&autoplay=0&loop=1&start=18&playlist=n5i3QRvPA9Y" 
+        src="https://www.youtube.com/embed/n5i3QRvPA9Y?enablejsapi=1&autoplay=1&loop=1&start=18&playlist=n5i3QRvPA9Y" 
         frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
     <script>
-        // Music JS sama seperti di atas
-        const playPauseBtn = document.getElementById('play-pause-btn');
-        const youtubeIframe = document.getElementById('youtube-player');
-        let isPlaying = false;
-        function toggleMusic() {
-            if (isPlaying) { youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); playPauseBtn.innerHTML = '▶️'; }
-            else { youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); playPauseBtn.innerHTML = '❚❚'; }
-            isPlaying = !isPlaying;
+        // Floating hearts
+        function createFloating() {
+            const element = document.createElement('div');
+            element.className = 'floating';
+            element.textContent = ['💖','💗','🌸','✨'][Math.floor(Math.random()*4)];
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.top = Math.random() * 100 + 'vh';
+            element.style.fontSize = (Math.random() * 35 + 25) + 'px';
+            document.body.appendChild(element);
+
+            gsap.to(element, {
+                y: -800,
+                x: Math.random() * 200 - 100,
+                rotation: Math.random() * 720,
+                duration: Math.random() * 8 + 8,
+                opacity: 0,
+                onComplete: () => element.remove()
+            });
         }
-        playPauseBtn.addEventListener('click', toggleMusic);
+        setInterval(createFloating, 600);
+
+        // Force auto play musik
+        const player = document.getElementById('youtube-player');
+        window.addEventListener('load', () => {
+            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        });
     </script>
 </body>
 </html>
